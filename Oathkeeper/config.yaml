@@ -1,0 +1,50 @@
+serve:
+  proxy:
+    port: 4455 # run the proxy at port 4455
+  api:
+    port: 4456 # run the api at port 4456
+
+access_rules:
+  repositories:
+    - file:///rules.json
+
+errors:
+  fallback:
+    - json
+  handlers:
+    json:
+      enabled: true
+      config:
+        verbose: true
+
+mutators:
+  noop:
+    enabled: true
+
+authorizers:
+  allow:
+    enabled: true
+  keto_engine_acp_ory:
+    enabled: true
+
+    config:
+      base_url: http://ory-keto-engine:4466/
+      flavor: glob
+      required_action: ''
+      required_resource: ''
+      subject: '{{ print .Subject }}'
+
+authenticators:
+  noop:
+    enabled: true
+  anonymous:
+    enabled: true
+    config:
+      subject: guest
+  bearer_token:
+    enabled: true
+
+    config:
+      check_session_url: http://quizzr-df-server:5000/validate
+      preserve_path: true
+      subject_from: subject

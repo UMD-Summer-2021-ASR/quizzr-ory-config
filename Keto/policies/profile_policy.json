@@ -1,0 +1,9 @@
+[
+  {
+    "id": "user_mod",
+    "subjects": ["quizzr.io:roles:admin"],
+    "actions": ["quizzr.io:actions:modify", "quizzr.io:actions:delete"],
+    "resources": ["quizzr.io:resources:profiles:*"],
+    "effect": "allow"
+  }
+]

@@ -1,0 +1,252 @@
+[
+  {
+    "id": "modify-other-profiles",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/profile/<.+>",
+      "methods": ["PATCH"]
+    },
+    "authenticators": [
+      {
+        "handler": "bearer_token"
+      }
+    ],
+    "authorizer": {
+      "handler": "keto_engine_acp_ory",
+      "config": {
+        "required_action": "quizzr.io:actions:modify",
+        "required_resource": "quizzr.io:resources:profiles:{{ printIndex .MatchContext.RegexpCaptureGroups 0 }}",
+        "subject": "quizzr.io:roles:{{ print .Subject }}"
+      }
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "delete-other-profiles",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/profile/<.+>",
+      "methods": ["DELETE"]
+    },
+    "authenticators": [
+      {
+        "handler": "bearer_token"
+      }
+    ],
+    "authorizer": {
+      "handler": "keto_engine_acp_ory",
+      "config": {
+        "required_action": "quizzr.io:actions:delete",
+        "required_resource": "quizzr.io:resources:profiles:{{ printIndex .MatchContext.RegexpCaptureGroups 0 }}",
+        "subject": "quizzr.io:roles:{{ print .Subject }}"
+      }
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "own-profile",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/profile",
+      "methods": ["GET", "PATCH", "DELETE"]
+    },
+    "authenticators": [
+      {
+        "handler": "bearer_token"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "create-own-profile",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/profile",
+      "methods": ["POST"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "view-other-profiles",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/profile/<.+>",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "get-unrec-question",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/question/unrec",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "check-answer",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/answer",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "upload-recording",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/audio",
+      "methods": ["POST"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "get-audio-file",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/audio/<.+>",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "upload-question",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/question/unrec",
+      "methods": ["POST"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "get-question",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/question",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "audio-processor-access",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/audio",
+      "methods": ["GET", "PATCH"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  }
+]
