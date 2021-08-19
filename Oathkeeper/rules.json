@@ -121,7 +121,7 @@
     },
     "authenticators": [
       {
-        "handler": "noop"
+        "handler": "bearer_token"
       }
     ],
     "authorizer": {
@@ -161,7 +161,7 @@
     },
     "authenticators": [
       {
-        "handler": "noop"
+        "handler": "bearer_token"
       }
     ],
     "authorizer": {
@@ -238,6 +238,106 @@
     "match": {
       "url": "http://localhost:4455/audio",
       "methods": ["GET", "PATCH"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "hls-access",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/hls/<.+>",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "update-game-results",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/game_results",
+      "methods": ["PUT"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "gen-secret-key",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/<socket|backend>/key",
+      "methods": ["POST"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "get-leaderboard",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/leaderboard",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "noop"
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "prescreen-pointer",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/prescreen/<.+>",
+      "methods": ["GET"]
     },
     "authenticators": [
       {
