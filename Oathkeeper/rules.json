@@ -201,7 +201,10 @@
     },
     "authenticators": [
       {
-        "handler": "noop"
+        "handler": "bearer_token",
+        "config": {
+          "check_session_url": "http://quizzr-df-server:5000/validate?backend=proc"
+        }
       }
     ],
     "authorizer": {
@@ -241,7 +244,10 @@
     },
     "authenticators": [
       {
-        "handler": "noop"
+        "handler": "bearer_token",
+        "config": {
+          "check_session_url": "http://quizzr-df-server:5000/validate?backend=proc"
+        }
       }
     ],
     "authorizer": {
@@ -261,7 +267,10 @@
     },
     "authenticators": [
       {
-        "handler": "noop"
+        "handler": "bearer_token",
+        "config": {
+          "check_session_url": "http://quizzr-df-server:5000/validate?backend=hls"
+        }
       }
     ],
     "authorizer": {
@@ -281,7 +290,10 @@
     },
     "authenticators": [
       {
-        "handler": "noop"
+        "handler": "bearer_token",
+        "config": {
+          "check_session_url": "http://quizzr-df-server:5000/validate?backend=socket"
+        }
       }
     ],
     "authorizer": {
