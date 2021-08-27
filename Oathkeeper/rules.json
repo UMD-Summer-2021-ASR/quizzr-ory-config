@@ -233,6 +233,52 @@
     "mutators": [{"handler": "noop"}]
   },
   {
+    "id": "game-resource",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/game<(/.+)?>",
+      "methods": ["GET", "POST"]
+    },
+    "authenticators": [
+      {
+        "handler": "bearer_token",
+        "config": {
+          "check_session_url": "http://quizzr-df-server:5000/validate?backend=socket"
+        }
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
+    "id": "get-answer",
+    "version": "v0.38.14-beta.1",
+    "upstream": {
+      "url": "http://quizzr-df-server:5000"
+    },
+    "match": {
+      "url": "http://localhost:4455/answer_full/<\\d+>",
+      "methods": ["GET"]
+    },
+    "authenticators": [
+      {
+        "handler": "bearer_token",
+        "config": {
+          "check_session_url": "http://quizzr-df-server:5000/validate?backend=classifier"
+        }
+      }
+    ],
+    "authorizer": {
+      "handler": "allow"
+    },
+    "mutators": [{"handler": "noop"}]
+  },
+  {
     "id": "audio-processor-access",
     "version": "v0.38.14-beta.1",
     "upstream": {
